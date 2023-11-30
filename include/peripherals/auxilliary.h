@@ -5,15 +5,15 @@
 
 //Auxilliary
 
-#define AUX_ENABLES     = AUX_BASE + 4
-#define AUX_MU_IO       = AUX_BASE + 64
-#define AUX_MU_IER      = AUX_BASE + 68
-#define AUX_MU_IIR      = AUX_BASE + 72
-#define AUX_MU_LCR      = AUX_BASE + 76
-#define AUX_MU_MCR      = AUX_BASE + 80
-#define AUX_MU_LSR      = AUX_BASE + 84
-#define AUX_MU_CNTL     = AUX_BASE + 96
-#define AUX_MU_BRAUD    = AUX_BASE + 104
+#define AUX_ENABLES_REG     = AUX_BASE + 4
+#define AUX_MU_IO_REG       = AUX_BASE + 64
+#define AUX_MU_IER_REG      = AUX_BASE + 68
+#define AUX_MU_IIR_REG      = AUX_BASE + 72
+#define AUX_MU_LCR_REG      = AUX_BASE + 76
+#define AUX_MU_MCR_REG      = AUX_BASE + 80
+#define AUX_MU_LSR_REG      = AUX_BASE + 84
+#define AUX_MU_CNTL_REG     = AUX_BASE + 96
+#define AUX_MU_BRAUD_REG    = AUX_BASE + 104
 
 //other
 
