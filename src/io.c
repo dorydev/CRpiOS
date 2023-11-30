@@ -3,6 +3,7 @@
 #include "../include/common/main.h"
 //#include "../include/peripherals/auxilliary.h"
 
+
 //define baud auxilliary
 
 #define AUX_MU_BAUD(baud) ((AUX_UART_CLOCK/(baud*8))-1)
@@ -40,26 +41,30 @@ unsigned int gpio_call(unsigned int pin_number, unsigned int value, unsigned int
     return 1;
 }
 
-unsigned int gpio_set  ()
+unsigned int gpio_set  (unsigned int pin_number, unsigned int value)
 {
-    return 0;
+    return gpio_call(pin_number, value, GPSET0, 1, GPIO_MAX_PIN);
 }
+
 unsigned int gpio_clear(unsigned int pin_number, unsigned int value)
 {
-    return 0;
+    return gpio_call(pin_number, value, GPCLR0, 1, GPIO_MAX_PIN);
 }
+
 unsigned int gpio_pull (unsigned int pin_number, unsigned int value)
 {
-    return 0;
+    return gpio_call(pin_number, value, GPPUPPDN0, 2, GPIO_MAX_PIN);
 }
+
 unsigned int gpio_func (unsigned int pin_number, unsigned int value)
 {
-    return 0;
+    return gpio_call(pin_number, value, GPFSEL0, 3, GPIO_MAX_PIN);
 }
 
 void gpio_Alt5(unsigned int pin_number)
 {
-    return;
+    gpio_pull(pin_number, Pull_None);
+    gpio_func(pin_number, GPIO_FUNCTION_ALT5);
 }
 
 void uart_init()
