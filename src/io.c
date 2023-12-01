@@ -1,7 +1,7 @@
 //include main values for GPIO(AUX) regs adress.
 
 #include "../include/common/main.h"
-//#include "../include/peripherals/auxilliary.h"
+#include "../include/peripherals/auxilliary.h"
 
 
 //define baud auxilliary
