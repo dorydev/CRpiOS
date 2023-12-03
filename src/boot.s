@@ -1,9 +1,18 @@
+#define LOCAL_CONTROL   0xff800000
+#define LOCAL_PRESCALER 0xff800008
+#define OSC_FREQ        54000000
+#define MAIN_STACK      0x400000
+
 .section ".text.boot"
 
 .global _start:
 
 
 _start:
+
+    ldr     x0, =LOCAL_CONTROL   // Sort out the timer
+    str     wzr, [x0]
+
 
     // Check if processor ID is 0 (execute in main core)
 
