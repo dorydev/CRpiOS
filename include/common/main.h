@@ -1,6 +1,8 @@
 #pragma once
 
-#define PBASE       = 0xef0000
+#define PBASE           = 0xef0000
+#define LEGACY_BASE     = 0x7E000000
+#define SAFE_ADDRESS    = 0x00400000
 
 #define GPFSEL0     = PBASE + 0x200000
 #define GPSET0      = PBASE + 0x20001c

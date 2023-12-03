@@ -1,9 +1,13 @@
 arm_64bits=1
 enable_uart=1
 core_freq_min=500
-hdmi_safe=1
 kernel_old=1
 disable_commandline_tags=1
+
+hdmi_enable_4kp60=1
+hdmi_safe=1
+hdmi_group=1
+hdmi_mode=97
 
 [pi4]
 kernel=kernel8-rpi4.img

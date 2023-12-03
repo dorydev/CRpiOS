@@ -1,31 +1,6 @@
-#pragma once
+void spi_init();
+void spi_send_recv(unsigned char *sbuffer, unsigned char *rbuffer, unsigned int size);
+void spi_send(unsigned char *data, unsigned int size);
+void spi_recv(unsigned char *data, unsigned int size);
+void spi_chip_select(unsigned char chip_select);
 
-//SPI 1
-
-#define AUX_SPI1_CNTL0_REG
-#define AUX_SPI1_CNTL1_REG
-#define AUX_SPI_STAT_REG
-#define AUX_SPI1_PEEK_REG
-#define AUX_SPI1_IO_REG_a
-#define AUX_SPI1_IO_REG_b
-#define AUX_SPI1_IO_REG_c
-#define AUX_SPI1_IO_REG_d
-#define AUX_SPI1_TXHOLD_REG_a 
-#define AUX_SPI1_TXHOLD_REG_b
-#define AUX_SPI1_TXHOLD_REG_c
-#define AUX_SPI1_TXHOLD_REG_d
-
-//SPI 2
-
-#define AUX_SPI2_CNTL0_REG
-#define AUX_SPI2_CNTL1_REG
-#define AUX_SPI2_STAT_REG
-#define AUX_SPI2_PEEK_REG
-#define AUX_SPI2_IO_REG_a
-#define AUX_SPI2_IO_REG_b
-#define AUX_SPI2_IO_REG_c
-#define AUX_SPI2_IO_REG_d
-#define AUX_SPI2_TXHOLD_REG_a 
-#define AUX_SPI2_TXHOLD_REG_b
-#define AUX_SPI2_TXHOLD_REG_c
-#define AUX_SPI2_TXHOLD_REG_d
