@@ -5,18 +5,17 @@
 
 .section ".text.boot"
 
-.global _start:
-
+.global _start
 
 _start:
 
-    ldr     x0, =LOCAL_CONTROL   // Sort out the timer
+    ldr     x0, = 0xff800000  // Sort out the timer
     str     wzr, [x0]
 
 
     // Check if processor ID is 0 (execute in main core)
 
-    mrs     x1, mpdir_el1
+    mrs     x1, mpidr_el1
     and     x1, x1, #3
     cbz     x1, 2f
 
@@ -32,13 +31,13 @@ _start:
     ldr     x1, =_start
     mov     sp, x1
 
-    ldr     x1, =_bss_start
-    ldr     x1, =_bss_size
+    ldr     x1, =__bss_start
+    ldr     x1, =__bss_size
 
 3:  cbz     w2, 4f
-    str     xzr
+    str     xzr, [x1], #8
     sub     w2, w2, #1
     cbnz    w2, 3b          //loop if non-zero
 
-4:  bl      main
+4:  bl      main_kernel
     b       1b
