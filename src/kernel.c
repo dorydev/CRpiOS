@@ -1,6 +1,6 @@
 #include "../include/struct/io.h"
 
-void main_kernel()
+void kernel_main()
 {
     uart_init();
     uart_writeText("Hello World!\n");
