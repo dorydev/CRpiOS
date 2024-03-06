@@ -1,46 +1,30 @@
-#define LOCAL_CONTROL   0xff800000
-#define LOCAL_PRESCALER 0xff800008
-#define OSC_FREQ        54000000
-#define MAIN_STACK      0x400000
+.section ".text.boot"  // Make sure the linker puts this at the start of the kernel image
 
-.section ".text.boot"
-
-.global _start
+.global _start  // Execution starts here
 
 _start:
+    // Check processor ID is zero (executing on main core), else hang
+    mrs     x1, mpidr_el1
+    and     x1, x1, #3
+    cbz     x1, 2f
+    // We're not on the main core, so hang in an infinite wait loop
+1:  wfe
+    b       1b
+2:  // We're on the main core!
 
-    .org 0x80000
+    // Set stack to start below our code
+    ldr     x1, =_start
+    mov     sp, x1
 
-    ldr     x5, =_start
-    mov     sp, x5
+    // Clean the BSS section
+    ldr     x1, =__bss_start     // Start address
+    ldr     w2, =__bss_size      // Size of the section
+3:  cbz     w2, 4f               // Quit loop if zero
+    str     xzr, [x1], #8
+    sub     w2, w2, #1
+    cbnz    w2, 3b               // Loop if non-zero
 
-    //clear BSS
-
-    ldr     x5, =__bss_start
-    ldr     w6, =__bss_size
-
-
-1:  cbz     w6, 2f
-    str     xzr, [x5], #8
-    sub     w6, w6, #1
-    cbnz    w6, 1b
-
-
-//jump to C code (kernel.c)
-
-2:  bl      kernel_main
-
-//halt for failsafe
-halt:
-    wfe
-    b halt
-
-
-//-----------------
-
-// Entry point for the kernel. Registers:
-// x0 -> 32 bit pointer to DTB in memory (primary core only) / 0 (secondary cores)
-// x1 -> 0
-// x2 -> 0
-// x3 -> 0
-// x4 -> 32 bit kernel entry point, _start location
+    // Jump to our main() routine in C (make sure it doesn't return)
+4:  bl      pi_kernel_main
+    // In case it does return, halt the master core too
+    b       1b

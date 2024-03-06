@@ -7,10 +7,9 @@ COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -nostdinc -nostartfiles -ffr
 
 ASMOPS = -Iinclude
 
-LDOPS = 
-
 BUILD_DIR = build
 SRC_DIR = src
+BOOT_DIR = boot
 
 all: kernel8.img
 
@@ -34,7 +33,7 @@ DEP_FILES = $(OBJ_FILES:%.o=%.d)
 -include $(DEP_FILES)
 
 kernel8.img: linker.ld $(OBJ_FILES)
-	@echo "Building OS for RPI $(value RPI_VERSION)"
+	@echo "Building OS for Rasperry pi $(value RPI_VERSION)"
 	@echo ""
 
 	$(ARMGNU)-ld -T linker.ld -o $(BUILD_DIR)/kernel8.elf $(OBJ_FILES)
